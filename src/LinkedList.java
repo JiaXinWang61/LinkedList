@@ -80,7 +80,7 @@ public class LinkedList<E> {
     }
 
     //获取链表第一个元素
-    public E get() {
+    public E getFist() {
         return get(0);
     }
 
@@ -111,6 +111,33 @@ public class LinkedList<E> {
             cur = cur.next;
         }
         return false;
+    }
+
+    //删除链表中index位置的元素
+    public E remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("Remove failed. Illegal index");
+        }
+        Node prev = dummyHead;
+        for (int i = 0; i < index; i++) {
+            prev = prev.next;
+        }
+        Node retNode = prev.next;
+        prev.next = retNode.next;
+        retNode.next = null;
+        size--;
+        return retNode.e;
+
+    }
+
+    //删除链表中第一个元素
+    public E removeFirst() {
+        return remove(0);
+    }
+
+    //删除链表中最后一个元素
+    public E removeLast() {
+        return remove(size - 1);
     }
 
     @Override
